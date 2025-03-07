@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo "🔬 Executing tests..."
+if ! make tests; then
+    echo "😵 Tests failed"
+    exit 1
+fi
+
+echo "🏗️ Building the app..."
+if ! make build-release; then
+    echo "😵 Build failed"
+    exit 1
+fi
+
+echo "✅ Success!"
+exit 0

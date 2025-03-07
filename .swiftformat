@@ -1,0 +1,21 @@
+# file options
+
+--exclude .swiftpm,vendor,**/Resources,Scripts
+
+--swiftversion 6.0
+
+# format options
+
+--allman false
+--indent 4
+--stripunusedargs closure-only
+--decimalgrouping 3,4
+--commas inline
+--wraparguments before-first
+--wrapcollections before-first
+--header strip
+--maxwidth 120
+
+# rules
+
+--disable hoistPatternLet,redundantRawValues,andOperator,redundantNilInit

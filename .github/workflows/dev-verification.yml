@@ -1,0 +1,28 @@
+name: Commit verification (development branch)
+on:
+  workflow_dispatch:
+  push:
+    branches-ignore:
+      - main
+jobs:
+  verification:
+    name: Commit verification
+    runs-on: macos-15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Format
+        run: make format
+
+      - name: Execute tests
+        run: make tests-ci
+
+      - name: Simulate build release
+        run: make build-release
+
+      - name: Commit format changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Code format

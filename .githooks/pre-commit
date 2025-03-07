@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "📝 Formatting code..."
+if ! make format; then
+    echo "😵 fails"
+fi
+git add --all
+
+exit 0

@@ -1,0 +1,36 @@
+name: Release
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+jobs:
+  verification:
+    name: Release
+    runs-on: macos-15
+
+    permissions: # For semantic-release
+      contents: write
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Execute tests
+        run: make tests-ci
+
+      - name: Build release
+        run: make build-release
+
+      # RC
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.14.0
+
+      - name: Generate release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx -p @semantic-release/git -p @semantic-release/github -p @semantic-release/exec -p semantic-release@24.2.2 semantic-release
