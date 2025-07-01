@@ -5,10 +5,10 @@ let package = Package(
     name: "DepChecker",
     platforms: [.macOS(.v15)],
     dependencies: [
-        .package(url: "https://github.com/tuist/XcodeProj", exact: "8.27.3"),
-        .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.5.0"),
+        .package(url: "https://github.com/tuist/XcodeProj", exact: "9.4.3"),
+        .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.5.1"),
         .package(url: "https://github.com/ShawnBaek/Table.git", exact: "2.0.0"),
-        .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.55.5")
+        .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.56.4")
     ],
     targets: [
         .executableTarget(

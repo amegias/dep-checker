@@ -5,7 +5,7 @@ import Testing
 
 struct SwiftPackageAnalyzerTests {
     @Test
-    func testExampleResource() async throws {
+    func exampleResource() async throws {
         let swiftPackage = Bundle.module.path(forResource: "resources/spmProject/Package", ofType: "swift")!
         let swiftPackageUrl = URL(fileURLWithPath: swiftPackage)
 
@@ -44,7 +44,7 @@ struct SwiftPackageAnalyzerTests {
     }
 
     @Test
-    func testWrongResource() async throws {
+    func wrongResource() async throws {
         let swiftPackage = Bundle.module.path(forResource: "resources/wrongSPMProject/Package", ofType: "swift")!
         let swiftPackageUrl = URL(fileURLWithPath: swiftPackage)
 
