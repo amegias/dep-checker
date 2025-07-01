@@ -5,7 +5,7 @@ import Testing
 
 struct XCodeAnalyzerIntegrationTests {
     @Test
-    func testExampleResource() async throws {
+    func exampleResource() async throws {
         let xcodeproj = Bundle.module.path(forResource: "resources/xcodeprojProject/example", ofType: "xcodeproj")!
         let xcodeprojUrl = URL(string: xcodeproj)!
 
