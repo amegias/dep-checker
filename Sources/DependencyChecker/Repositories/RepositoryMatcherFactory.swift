@@ -21,7 +21,7 @@ struct RepositoryMatcherFactory {
         self.matchers = matchers
     }
 
-    public init() {
+    init() {
         matchers = Self.defaultMatchers
     }
 }
