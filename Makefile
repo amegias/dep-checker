@@ -10,8 +10,8 @@ format:
 
 build-release:
 	@echo "Building release..."
-	swift build -c release
-	@echo "Done! Check .build/arm64-apple-macosx/release/DepChecker"
+	swift build -c release --product dep-checker
+	@echo "Done in .build/arm64-apple-macosx/release/"
 
 tests: setup-xcbeautify
 	@echo "Running tests..."

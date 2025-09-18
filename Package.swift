@@ -1,9 +1,15 @@
-// swift-tools-version:6.0
+// swift-tools-version:6.2
 import PackageDescription
 
 let package = Package(
     name: "DepChecker",
     platforms: [.macOS(.v15)],
+    products: [
+        .executable(
+            name: "dep-checker",
+            targets: ["DepChecker"]
+        )
+    ],
     dependencies: [
         .package(url: "https://github.com/tuist/XcodeProj", exact: "9.5.0"),
         .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.6.1"),

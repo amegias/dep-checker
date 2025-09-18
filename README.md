@@ -15,7 +15,7 @@ DepChecker is a tool designed to help Swift developers analyze project dependenc
 To analyze the dependencies of your project, run:
 
 ```sh
-swift run -c release DepChecker [--output-format <output-format>] [--configuration-file <configuration-file>] [--git-hub-token <git-hub-token>] --project-path <project-path> [--resolved-package-path <resolved-package-path>] [--max-days <max-days>] [--exclude-dependencies <exclude-dependencies> ...] [--include-dependencies <include-dependencies> ...] [--include-transitive-dependencies]
+swift run -c release dep-checker [--output-format <output-format>] [--configuration-file <configuration-file>] [--git-hub-token <git-hub-token>] --project-path <project-path> [--resolved-package-path <resolved-package-path>] [--max-days <max-days>] [--exclude-dependencies <exclude-dependencies> ...] [--include-dependencies <include-dependencies> ...] [--include-transitive-dependencies]
 ```
 
 #### Params
@@ -33,7 +33,7 @@ swift run -c release DepChecker [--output-format <output-format>] [--configurati
 #### Example
 
 ```sh
-swift run -c release DepChecker -c ~/.depChecker/config.json --project-path ~/Projects/my-project/
+swift run -c release dep-checker -c ~/.depChecker/config.json --project-path ~/Projects/my-project/
 ```
 
 ##### ~/.depChecker/config.json
@@ -80,7 +80,15 @@ jobs:
     # Executing depChecker from its folder
     run: |
       cd depChecker
-      swift run -c release DepChecker --project-path ../MyProject/ --git-hub-token ${{ secrets.GITHUB_TOKEN }} --max-days 365
+      swift run -c release dep-checker --project-path ../MyProject/ --git-hub-token ${{ secrets.GITHUB_TOKEN }} --max-days 365
+```
+
+### Mint
+
+```sh
+mint install amegias/ios-dep-checker
+dep-checker --project-path ../MyProject/ --git-hub-token ${{ secrets.GITHUB_TOKEN }} --max-days 365
+
 ```
 
 ## Contributing
