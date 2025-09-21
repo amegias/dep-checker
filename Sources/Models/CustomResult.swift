@@ -11,15 +11,15 @@ extension CustomResult: Encodable {
 
         switch self {
         case .success(let value):
-            try container.encode(value, forKey: .success)
+            try container.encode(value, forKey: .value)
         case .failure(let error):
-            try container.encode(String(describing: error), forKey: .failure)
+            try container.encode(String(describing: error), forKey: .error)
         }
     }
 
     private enum CodingKeys: String, CodingKey {
-        case success
-        case failure
+        case value
+        case error
     }
 }
 
