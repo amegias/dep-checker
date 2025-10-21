@@ -1,11 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1620"
+   LastUpgradeVersion = "2600"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES"
       buildArchitectures = "Automatic">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "dep-checker"
+               BuildableName = "dep-checker"
+               BlueprintName = "dep-checker"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "dep-checker-mcp"
+               BuildableName = "dep-checker-mcp"
+               BlueprintName = "dep-checker-mcp"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
@@ -18,9 +48,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OutputTests"
-               BuildableName = "OutputTests"
-               BlueprintName = "OutputTests"
+               BlueprintIdentifier = "DependencyCheckerTests"
+               BuildableName = "DependencyCheckerTests"
+               BlueprintName = "DependencyCheckerTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
@@ -48,19 +78,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ValidationTests"
-               BuildableName = "ValidationTests"
-               BlueprintName = "ValidationTests"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DependencyCheckerTests"
-               BuildableName = "DependencyCheckerTests"
-               BlueprintName = "DependencyCheckerTests"
+               BlueprintIdentifier = "OutputTests"
+               BuildableName = "OutputTests"
+               BlueprintName = "OutputTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
@@ -71,6 +91,16 @@
                BlueprintIdentifier = "ProjectAnalyzerTests"
                BuildableName = "ProjectAnalyzerTests"
                BlueprintName = "ProjectAnalyzerTests"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ValidationTests"
+               BuildableName = "ValidationTests"
+               BlueprintName = "ValidationTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
@@ -89,9 +119,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DepChecker"
-            BuildableName = "DepChecker"
-            BlueprintName = "DepChecker"
+            BlueprintIdentifier = "dep-checker"
+            BuildableName = "dep-checker"
+            BlueprintName = "dep-checker"
             ReferencedContainer = "container:">
          </BuildableReference>
       </MacroExpansion>
@@ -102,6 +132,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "dep-checker-mcp"
+            BuildableName = "dep-checker-mcp"
+            BlueprintName = "dep-checker-mcp"
+            ReferencedContainer = "container:">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

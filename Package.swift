@@ -3,22 +3,22 @@ import PackageDescription
 
 let package = Package(
     name: "DepChecker",
-    platforms: [.macOS(.v15)],
+    platforms: [.macOS(.v26)],
     products: [
         .executable(
             name: "dep-checker",
-            targets: ["DepChecker"]
+            targets: ["CLI"]
         )
     ],
     dependencies: [
         .package(url: "https://github.com/tuist/XcodeProj", exact: "9.5.0"),
-        .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.6.1"),
+        .package(url: "https://github.com/apple/swift-argument-parser.git", exact: "1.6.1"),
         .package(url: "https://github.com/ShawnBaek/Table.git", exact: "2.0.0"),
-        .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.57.2")
+        .package(url: "https://github.com/nicklockwood/SwiftFormat", exact: "0.57.2"),
     ],
     targets: [
         .executableTarget(
-            name: "DepChecker",
+            name: "CLI",
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 "Models",
@@ -27,16 +27,15 @@ let package = Package(
                 "DependencyChecker",
                 "ProjectAnalyzer",
                 "Validation"
-            ],
-            path: "Sources/CLI",
-            resources: [
-                .copy("VERSION.txt")
             ]
         ),
         .target(
             name: "Models",
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser")
+            ],
+            resources: [
+                .copy("VERSION.txt")
             ]
         ),
         .target(

@@ -4,31 +4,31 @@ The app is divided into 5 modules:
 
 ```mermaid
         graph TD;
-                DepCheckerApp@{ shape: circle }-->InputCalculator;
+                CLI@{ shape: circle }-->InputCalculator;
                 subgraph 1 [Input]
                                 InputCalculator-.reads.->FileInputReader@{shape: cyl};
                 end
 
-                DepCheckerApp-->ProjectAnalyzer;
+                CLI-->ProjectAnalyzer;
                 subgraph 2 [Analysis]
                                 ProjectAnalyzer-->FileFinder@{shape: cyl};
                                 ProjectAnalyzer--has serveral-->Analyzer;
                                 ProjectAnalyzer-->DependencyMerger;
                 end
 
-                DepCheckerApp-->DependencyChecker;
+                CLI-->DependencyChecker;
                 subgraph 3 [Check]
                                 DependencyChecker-->RepositoryMatcherFactory;
                                 RepositoryMatcherFactory-.matches.->Repository@{shape: rounded };
                 end
 
-                DepCheckerApp-->OutputPrinter;
+                CLI-->OutputPrinter;
                 subgraph 4 [Output]
                                 OutputPrinter-->OutputPrinterFactory;
                                 OutputPrinterFactory-.gets.->Printer@{shape: rounded };
                 end
 
-                DepCheckerApp-->DependencyValidator;
+                CLI-->DependencyValidator;
                 subgraph 5 [Validation]
                                 DependencyValidator-.gets.->CheckedDependencyValidator@{shape: rounded };
                 end

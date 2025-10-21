@@ -1,14 +1,24 @@
 {
-    "plugins": [
-        "@semantic-release/commit-analyzer",
-        "@semantic-release/release-notes-generator",
-        ["@semantic-release/exec", {
-            "prepareCmd": "echo ${nextRelease.version} > Sources/CLI/VERSION.txt"
-        }],
-        ["@semantic-release/git", {
-            "assets": ["Sources/CLI/VERSION.txt"]
-        }],
-        "@semantic-release/github"
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "echo ${nextRelease.version} > Sources/Models/VERSION.txt"
+      }
     ],
-    "branches": ["main"]
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "Sources/Models/VERSION.txt"
+        ]
+      }
+    ],
+    "@semantic-release/github"
+  ],
+  "branches": [
+    "main"
+  ]
 }

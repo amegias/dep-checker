@@ -1,4 +1,4 @@
-@preconcurrency import ArgumentParser
+import ArgumentParser
 import DependencyChecker
 import Foundation
 import Input
@@ -8,7 +8,7 @@ import ProjectAnalyzer
 import Validation
 
 @main
-struct DepCheckerApp: AsyncParsableCommand {
+struct CLI: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         abstract: "Check the outdated dependencies",
         version: .appVersion
@@ -113,17 +113,5 @@ private extension FileInput {
         maxDaysPerDependency (optional)
         \(String(data: data, encoding: .utf8)!)
         """
-    }
-}
-
-private extension String {
-    static var appVersion: String {
-        try! String(
-            contentsOf: Bundle.module.url(
-                forResource: "VERSION",
-                withExtension: "txt"
-            )!,
-            encoding: .utf8
-        )
     }
 }

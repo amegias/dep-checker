@@ -86,9 +86,7 @@ jobs:
 ### Mint
 
 ```sh
-mint install amegias/ios-dep-checker
-dep-checker --project-path ../MyProject/ --git-hub-token ${{ secrets.GITHUB_TOKEN }} --max-days 365
-
+mint run amegias/ios-dep-checker --project-path ../MyProject/ --git-hub-token ${{ secrets.GITHUB_TOKEN }} --max-days 365
 ```
 
 ## Contributing
