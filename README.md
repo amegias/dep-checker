@@ -86,7 +86,22 @@ jobs:
 ### Mint
 
 ```sh
-mint run amegias/ios-dep-checker --project-path ../MyProject/ --git-hub-token ${{ secrets.GITHUB_TOKEN }} --max-days 365
+mint run amegias/ios-dep-checker --project-path ../MyProject/
+```
+
+### As Model Context Protocol (MCP) Server
+#### VS Code + Copilot (or similar)
+1. Open `mcp.json` config file.
+2. Add the `dep-checker-mcp` as a new MCP.
+```json
+{
+  "servers": {
+    "dep-checker-ios": {
+      "command": "/.../dep-checker-mcp",
+      "args": []
+    }
+  }
+}
 ```
 
 ## Contributing

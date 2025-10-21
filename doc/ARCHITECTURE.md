@@ -1,34 +1,34 @@
 # DepChecker Architecture
 
-The app is divided into 5 modules:
+The app (CLI and MCP Server) is divided into 5 modules:
 
 ```mermaid
         graph TD;
-                CLI@{ shape: circle }-->InputCalculator;
+                APP@{ shape: circle }-->InputCalculator;
                 subgraph 1 [Input]
                                 InputCalculator-.reads.->FileInputReader@{shape: cyl};
                 end
 
-                CLI-->ProjectAnalyzer;
+                APP-->ProjectAnalyzer;
                 subgraph 2 [Analysis]
                                 ProjectAnalyzer-->FileFinder@{shape: cyl};
                                 ProjectAnalyzer--has serveral-->Analyzer;
                                 ProjectAnalyzer-->DependencyMerger;
                 end
 
-                CLI-->DependencyChecker;
+                APP-->DependencyChecker;
                 subgraph 3 [Check]
                                 DependencyChecker-->RepositoryMatcherFactory;
                                 RepositoryMatcherFactory-.matches.->Repository@{shape: rounded };
                 end
 
-                CLI-->OutputPrinter;
+                APP-->OutputPrinter;
                 subgraph 4 [Output]
                                 OutputPrinter-->OutputPrinterFactory;
                                 OutputPrinterFactory-.gets.->Printer@{shape: rounded };
                 end
 
-                CLI-->DependencyValidator;
+                APP-->DependencyValidator;
                 subgraph 5 [Validation]
                                 DependencyValidator-.gets.->CheckedDependencyValidator@{shape: rounded };
                 end

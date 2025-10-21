@@ -20,3 +20,7 @@ tests: setup-xcbeautify
 tests-ci:
 	@echo "Running tests in CI..."
 	swift test
+
+# MCP
+debug-mcp:
+	swift build --product dep-checker-mcp && npx @modelcontextprotocol/inspector $(shell pwd)/.build/arm64-apple-macosx/debug/dep-checker-mcp
