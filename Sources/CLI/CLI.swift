@@ -22,7 +22,7 @@ struct CLI: AsyncParsableCommand {
     var configurationFile: URL?
 
     @Option(name: .long)
-    var gitHubToken: String?
+    var githubToken: String?
 
     @Option(name: .long, help: "Path to the Package.swift or .pbxproj file")
     var projectPath: URL
@@ -50,7 +50,7 @@ struct CLI: AsyncParsableCommand {
         let input = try InputCalculator().calculate(
             InlineInput(
                 configFile: configurationFile,
-                gitHubToken: gitHubToken,
+                gitHubToken: githubToken,
                 maxDays: maxDays,
                 outputFormat: outputFormat,
                 projectPath: projectPath,

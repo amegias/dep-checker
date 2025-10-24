@@ -26,13 +26,13 @@ struct BitbucketClient: BitbucketClientProtocol {
 }
 
 extension BitbucketClient {
-    enum APIError: Error, CustomStringConvertible {
+    enum APIError: Error, LocalizedError {
         case notFound
 
-        var description: String {
+        var errorDescription: String? {
             switch self {
             case .notFound:
-                "not found"
+                "BitBucket resource not found"
             }
         }
     }

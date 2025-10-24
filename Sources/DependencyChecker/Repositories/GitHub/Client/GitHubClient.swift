@@ -10,16 +10,19 @@ protocol GitHubClientProtocol: Sendable {
 }
 
 struct GitHubClient: GitHubClientProtocol {
-    enum APIError: Error, CustomStringConvertible {
+    enum APIError: Error, LocalizedError {
         case notFound
+        case badCredentials
         case genericError
 
-        var description: String {
+        var errorDescription: String? {
             switch self {
             case .notFound:
-                "not found"
+                "GitHub resource not found"
+            case .badCredentials:
+                "GitHub token not valid"
             case .genericError:
-                "generic"
+                "GitHub API error"
             }
         }
     }
@@ -65,8 +68,8 @@ private extension GitHubClient {
         if httpResponse?.statusCode == 404 {
             throw APIError.notFound
         } else if httpResponse?.statusCode == 401 {
-            Logger.gitHubClient.error("Bad credentials!")
-            throw APIError.notFound
+            Logger.gitHubClient.warning("Bad credentials!")
+            throw APIError.badCredentials
         } else if httpResponse?.statusCode == 200 {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
