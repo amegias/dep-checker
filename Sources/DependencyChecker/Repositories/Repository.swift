@@ -6,16 +6,16 @@ public protocol Repository: Sendable {
     func getLatestVersion() async -> CustomResult<LatestVersion, any Error>
 }
 
-enum RepositoryError: Error, Equatable, CustomStringConvertible {
+enum RepositoryError: Error, Equatable, LocalizedError {
     case wrongPayload
     case nonExactVersionType(String)
 
-    var description: String {
+    var errorDescription: String? {
         switch self {
         case .wrongPayload:
-            "wrong payload"
+            "Unexpected API response"
         case .nonExactVersionType(let string):
-            "unhandled type: \(string)"
+            "Non exact version (\(string))"
         }
     }
 }

@@ -10,22 +10,24 @@ protocol GitHubClientProtocol: Sendable {
 }
 
 struct GitHubClient: GitHubClientProtocol {
-    enum APIError: Error, CustomStringConvertible {
+    enum APIError: Error, LocalizedError {
         case notFound
+        case badCredentials
         case genericError
-        case missingToken
 
-        var description: String {
+        var errorDescription: String? {
             switch self {
             case .notFound:
-                "not found"
+                "GitHub resource not found"
+            case .badCredentials:
+                "GitHub token not valid"
             case .genericError:
-                "generic"
-            case .missingToken:
-                "missing access token"
+                "GitHub API error"
             }
         }
     }
+
+    let gitHubToken: String
 
     func getLatestRelease(_ owner: String, _ repo: String) async throws -> GitHubRelease {
         try await get(reposPath: "\(owner)/\(repo)/releases/latest")
@@ -54,22 +56,20 @@ struct GitHubClient: GitHubClientProtocol {
 
 private extension GitHubClient {
     func get<T: Decodable>(reposPath: String) async throws -> T {
-        guard let token = await Configuration.shared.gitHubToken else { throw APIError.missingToken }
-
         let url = "https://api.github.com/repos/\(reposPath)"
         Logger.gitHubClient.debug("Getting \(url)...")
         var request = URLRequest(url: URL(string: url)!)
         request.addValue("application/vnd.github+json", forHTTPHeaderField: "Accept")
         request.addValue("2022-11-28", forHTTPHeaderField: "X-GitHub-Api-Version")
-        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer \(gitHubToken)", forHTTPHeaderField: "Authorization")
 
         let (data, response) = try await URLSession.shared.data(for: request)
         let httpResponse = response as? HTTPURLResponse
         if httpResponse?.statusCode == 404 {
             throw APIError.notFound
         } else if httpResponse?.statusCode == 401 {
-            Logger.gitHubClient.error("Bad credentials!")
-            throw APIError.notFound
+            Logger.gitHubClient.warning("Bad credentials!")
+            throw APIError.badCredentials
         } else if httpResponse?.statusCode == 200 {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601

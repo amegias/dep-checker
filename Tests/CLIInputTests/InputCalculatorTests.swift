@@ -1,5 +1,6 @@
+@testable import CLIInput
 import Foundation
-@testable import Input
+import Input
 import Testing
 
 struct InputCalculatorTests {}
@@ -34,6 +35,7 @@ extension InputCalculatorTests {
         #expect(inlineInput.projectPath == input.projectPath)
         #expect(Set(inlineInput.includeDependencies) == input.includeDependencies)
         #expect(Set(inlineInput.excludeDependencies) == input.excludeDependencies)
+        #expect(inlineInput.includeTransitiveDependencies == input.includeTransitiveDependencies)
     }
 
     @Test
@@ -53,6 +55,7 @@ extension InputCalculatorTests {
         #expect(inlineInput.projectPath == input.projectPath)
         #expect(Set(inlineInput.includeDependencies) == input.includeDependencies)
         #expect(Set(inlineInput.excludeDependencies) == input.excludeDependencies)
+        #expect(inlineInput.includeTransitiveDependencies == input.includeTransitiveDependencies)
     }
 
     @Test
@@ -75,6 +78,7 @@ extension InputCalculatorTests {
         #expect(inlineInput.projectPath == input.projectPath)
         #expect(Set(inlineInput.includeDependencies) == input.includeDependencies)
         #expect(Set(inlineInput.excludeDependencies) == input.excludeDependencies)
+        #expect(inlineInput.includeTransitiveDependencies == input.includeTransitiveDependencies)
     }
 
     @Test
@@ -91,12 +95,13 @@ extension InputCalculatorTests {
 
         let input = try sut.calculate(inlineInput)
 
-        #expect(inlineInput.gitHubToken == nil)
+        #expect(input.gitHubToken == nil)
         #expect(inlineInput.maxDays == nil)
         #expect(inlineInput.outputFormat == input.outputFormat)
         #expect(inlineInput.projectPath == input.projectPath)
         #expect(Set(inlineInput.includeDependencies) == input.includeDependencies)
         #expect(Set(inlineInput.excludeDependencies) == input.excludeDependencies)
+        #expect(inlineInput.includeTransitiveDependencies == input.includeTransitiveDependencies)
     }
 }
 

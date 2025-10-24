@@ -28,7 +28,7 @@ struct RepositoryMatcherFactoryTests {
         ]
         let sut = RepositoryMatcherFactory(matchers: repositoryMatchers)
 
-        await #expect(throws: RepositoryMatcherFactoryError.notFound.self, performing: {
+        await #expect(throws: RepositoryMatcherFactoryError.notHandled.self, performing: {
             try await sut.findRepository(.any(name: "any"))
         })
     }

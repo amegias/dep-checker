@@ -1,6 +1,6 @@
 import Foundation
 import Models
 
-protocol CheckedDependencyValidator: Sendable {
+public protocol CheckedDependencyValidator: Sendable {
     func validate(_ checkedDependencies: [CheckedDependency]) throws
 }

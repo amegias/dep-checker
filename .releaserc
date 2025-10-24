@@ -5,14 +5,14 @@
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "echo ${nextRelease.version} > Sources/Models/VERSION.txt"
+        "prepareCmd": "echo ${nextRelease.version} > Sources/Input/VERSION.txt"
       }
     ],
     [
       "@semantic-release/git",
       {
         "assets": [
-          "Sources/Models/VERSION.txt"
+          "Sources/Input/VERSION.txt"
         ]
       }
     ],

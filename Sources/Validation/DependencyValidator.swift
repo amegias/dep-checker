@@ -2,17 +2,9 @@ import Foundation
 import Models
 
 public struct DependencyValidator {
-    static let defaultValidators: [CheckedDependencyValidator] = [
-        MaxDaysCheckedDependencyValidator()
-    ]
-
     private let validators: [CheckedDependencyValidator]
 
-    public init() {
-        validators = Self.defaultValidators
-    }
-
-    init(validators: [CheckedDependencyValidator]) {
+    public init(validators: [CheckedDependencyValidator]) {
         self.validators = validators
     }
 }

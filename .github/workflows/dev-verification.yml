@@ -16,6 +16,9 @@ jobs:
       - name: Format
         run: make format
 
+      - name: Search dead code
+        run: make scan_dead_code
+
       - name: Execute tests
         run: make tests-ci
 

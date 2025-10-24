@@ -1,5 +1,5 @@
 import Foundation
-import Models
+import Output
 
 public struct Input {
     public let gitHubToken: String?

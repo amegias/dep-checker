@@ -2,10 +2,12 @@ import Foundation
 import Models
 import OSLog
 
-struct BitbucketRepositoryMatcher {}
+public struct BitbucketRepositoryMatcher {
+    public init() {}
+}
 
 extension BitbucketRepositoryMatcher: RepositoryMatcher {
-    func match(_ dependency: AnalyzedDependency) throws(RepositoryMatcherError) -> any Repository {
+    public func match(_ dependency: AnalyzedDependency) throws(RepositoryMatcherError) -> any Repository {
         if dependency.url.host() == "bitbucket.org",
            dependency.url.pathComponents.count == 3
         {

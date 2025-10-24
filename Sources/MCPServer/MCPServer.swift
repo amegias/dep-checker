@@ -1,14 +1,23 @@
+import ArgumentParser
 import Foundation
 import MCP
-import Models
+import MCPServerInput
 
 @main
-struct MCPServer {
-    static func main() async throws {
+struct MCPServer: AsyncParsableCommand {
+    static let configuration = CommandConfiguration.default
+
+    @Option(name: .shortAndLong, help: ArgumentHelp(discussion: FileInput.anyExample()))
+    var configurationFile: URL?
+
+    @Flag(name: [.long])
+    var includeTransitiveDependencies = false
+
+    mutating func run() async throws {
         let server = Server(
             name: "dep-checker-mcp",
-            version: .appVersion,
-            capabilities: .init(tools: .init(listChanged: true))
+            version: Self.configuration.version,
+            capabilities: .init(tools: .init(listChanged: false))
         )
 
         await server.withMethodHandler(ListTools.self, handler: listToolsHandler)
@@ -22,14 +31,27 @@ struct MCPServer {
 }
 
 private extension MCPServer {
-    static func listToolsHandler(_ params: ListTools.Parameters) -> ListTools.Result {
-        .init(tools: Tools.allCases.map(\.tool))
+    func listToolsHandler(_: ListTools.Parameters) -> ListTools.Result {
+        .init(tools: ToolType.allCases.map(\.tool).map(\.mcpTool))
     }
 
-    static func callToolHandler(_ params: CallTool.Parameters) async -> CallTool.Result {
-        guard let tools = Tools(rawValue: params.name) else {
+    func callToolHandler(_ params: CallTool.Parameters) async -> CallTool.Result {
+        guard let type = ToolType(rawValue: params.name) else {
             return .init(content: [.text("Unknown tool")], isError: true)
         }
-        return await tools.callTool(args: params.arguments)
+        do {
+            let input = try InputCalculator().calculate(
+                InlineInput(
+                    configFile: configurationFile
+                ),
+                EnvironmentInput(
+                    gitHubToken: ProcessInfo.processInfo.environment["GH_TOKEN"]
+                )
+            )
+
+            return try await type.tool.handler(args: params.arguments, input: input)
+        } catch {
+            return .init(content: [.text(error.localizedDescription)], isError: true)
+        }
     }
 }

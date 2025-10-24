@@ -1,18 +1,14 @@
 import ArgumentParser
+import CLIInput
 import DependencyChecker
 import Foundation
-import Input
-import Models
 import Output
 import ProjectAnalyzer
 import Validation
 
 @main
 struct CLI: AsyncParsableCommand {
-    static let configuration = CommandConfiguration(
-        abstract: "Check the outdated dependencies",
-        version: .appVersion
-    )
+    static let configuration = CommandConfiguration.default
 
     // MARK: - Args
 
@@ -26,7 +22,7 @@ struct CLI: AsyncParsableCommand {
     var configurationFile: URL?
 
     @Option(name: .long)
-    var gitHubToken: String?
+    var githubToken: String?
 
     @Option(name: .long, help: "Path to the Package.swift or .pbxproj file")
     var projectPath: URL
@@ -54,7 +50,7 @@ struct CLI: AsyncParsableCommand {
         let input = try InputCalculator().calculate(
             InlineInput(
                 configFile: configurationFile,
-                gitHubToken: gitHubToken,
+                gitHubToken: githubToken,
                 maxDays: maxDays,
                 outputFormat: outputFormat,
                 projectPath: projectPath,
@@ -63,10 +59,6 @@ struct CLI: AsyncParsableCommand {
                 excludeDependencies: excludeDependencies,
                 includeTransitiveDependencies: includeTransitiveDependencies
             )
-        )
-
-        await Configuration.shared.configure(
-            gitHubToken: input.gitHubToken
         )
 
         // MARK: - Analyze the project
@@ -81,11 +73,18 @@ struct CLI: AsyncParsableCommand {
 
         // MARK: - Dependency checks
 
-        let results = await DependencyChecker().check(
-            dependencies,
-            maxDays: input.maxDays,
-            maxDaysPerDependency: input.maxDaysPerDependency
-        )
+        var matchers: [RepositoryMatcher] = [
+            BitbucketRepositoryMatcher()
+        ]
+        if let gitHubToken = input.gitHubToken {
+            matchers.append(GitHubRepositoryMatcher(gitHubToken: gitHubToken))
+        }
+        let results = await DependencyChecker(matchers: matchers)
+            .check(
+                dependencies,
+                maxDays: input.maxDays,
+                maxDaysPerDependency: input.maxDaysPerDependency
+            )
 
         // MARK: - Get the output
 
@@ -93,25 +92,9 @@ struct CLI: AsyncParsableCommand {
 
         // MARK: - Exit based on validations
 
-        try DependencyValidator().validate(results)
-    }
-}
-
-private extension FileInput {
-    static func anyExample() -> String {
-        let jsonEncoder = JSONEncoder()
-        jsonEncoder.outputFormatting = [.prettyPrinted]
-        let example = FileInput(
-            gitHubToken: "anyToken",
-            maxDays: 30,
-            maxDaysPerDependency: ["mistica-ios": 10]
-        )
-        let data = try! jsonEncoder.encode(example)
-        return """
-        gitHubToken (optional)
-        maxDays (optional)
-        maxDaysPerDependency (optional)
-        \(String(data: data, encoding: .utf8)!)
-        """
+        let validators: [CheckedDependencyValidator] = [
+            MaxDaysCheckedDependencyValidator()
+        ]
+        try DependencyValidator(validators: validators).validate(results)
     }
 }

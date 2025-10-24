@@ -2,7 +2,7 @@ import Foundation
 import Models
 import OSLog
 
-public enum ProjectAnalyzerError: Error {
+enum ProjectAnalyzerError: Error {
     case projectNotFound
 }
 

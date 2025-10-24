@@ -12,7 +12,7 @@ extension DependencyCheckerTests {
         let expectedDependencyA = CheckedDependency(
             from: dependencyA,
             currentVersionDate: .success(Date(timeIntervalSince1970: 600_000_000)),
-            latestVersion: .failure(RepositoryMatcherFactoryError.notFound),
+            latestVersion: .failure(RepositoryMatcherFactoryError.notHandled),
             maxDays: nil
         )
         let repositoryMockA = RepositoryMock(
@@ -25,8 +25,8 @@ extension DependencyCheckerTests {
         let dependencyB: AnalyzedDependency = .any(name: "B")
         let expectedDependencyB = CheckedDependency(
             from: dependencyB,
-            currentVersionDate: .failure(RepositoryMatcherFactoryError.notFound),
-            latestVersion: .failure(RepositoryMatcherFactoryError.notFound),
+            currentVersionDate: .failure(RepositoryMatcherFactoryError.notHandled),
+            latestVersion: .failure(RepositoryMatcherFactoryError.notHandled),
             maxDays: nil
         )
         // No repository related
@@ -114,7 +114,7 @@ private extension DependencyCheckerTests {
 private struct RepositoryMatcherFactoryMock: RepositoryMatcherFactoryProtocol {
     let repositoryByDependency: [String: Repository]
     func findRepository(_ dependency: AnalyzedDependency) throws(RepositoryMatcherFactoryError) -> any Repository {
-        guard let repository = repositoryByDependency[dependency.name] else { throw .notFound }
+        guard let repository = repositoryByDependency[dependency.name] else { throw .notHandled }
         return repository
     }
 }
