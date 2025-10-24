@@ -56,10 +56,14 @@ private extension CheckedDependency {
         }
 
         let daysOutdated = max(0, outdated)
-        let isOutdated = if let maxDays, maxDays < daysOutdated { true } else { false }
+        let exceedsMaxDays: Bool? = if let maxDays {
+            maxDays < daysOutdated
+        } else {
+            nil
+        }
         return Outdated(
             daysOutdated: daysOutdated,
-            isOutdated: isOutdated
+            exceedsMaxDays: exceedsMaxDays
         )
     }
 }

@@ -14,12 +14,14 @@ extension CustomResult: Encodable {
             try container.encode(value, forKey: .value)
         case .failure(let error):
             try container.encode(String(describing: error), forKey: .error)
+            try container.encode(error.localizedDescription, forKey: .errorDescription)
         }
     }
 
     private enum CodingKeys: String, CodingKey {
         case value
         case error
+        case errorDescription
     }
 }
 
@@ -29,7 +31,7 @@ extension CustomResult: CustomStringConvertible {
         case .success(let t):
             "\(t)"
         case .failure(let e):
-            "Error: \(e)"
+            "Error: \(e.localizedDescription)"
         }
     }
 }

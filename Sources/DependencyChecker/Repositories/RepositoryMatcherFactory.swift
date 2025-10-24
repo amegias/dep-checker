@@ -1,8 +1,15 @@
 import Foundation
 import Models
 
-enum RepositoryMatcherFactoryError: Error {
-    case notFound
+enum RepositoryMatcherFactoryError: Error, LocalizedError {
+    case notHandled
+
+    var errorDescription: String? {
+        switch self {
+        case .notHandled:
+            "Unhandled repository. Cannot check this dependency"
+        }
+    }
 }
 
 protocol RepositoryMatcherFactoryProtocol: Sendable {
@@ -10,20 +17,7 @@ protocol RepositoryMatcherFactoryProtocol: Sendable {
 }
 
 struct RepositoryMatcherFactory {
-    static let defaultMatchers: [RepositoryMatcher] = [
-        GitHubRepositoryMatcher(),
-        BitbucketRepositoryMatcher()
-    ]
-
-    private let matchers: [RepositoryMatcher]
-
-    init(matchers: [RepositoryMatcher]) {
-        self.matchers = matchers
-    }
-
-    init() {
-        matchers = Self.defaultMatchers
-    }
+    let matchers: [RepositoryMatcher]
 }
 
 extension RepositoryMatcherFactory: RepositoryMatcherFactoryProtocol {
@@ -34,10 +28,10 @@ extension RepositoryMatcherFactory: RepositoryMatcherFactoryProtocol {
             do {
                 return try await repositoryMatcher.match(dependency)
             } catch {
-                // continue
+                continue
             }
         }
 
-        throw RepositoryMatcherFactoryError.notFound
+        throw RepositoryMatcherFactoryError.notHandled
     }
 }

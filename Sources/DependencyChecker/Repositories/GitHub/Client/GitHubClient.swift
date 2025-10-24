@@ -13,7 +13,6 @@ struct GitHubClient: GitHubClientProtocol {
     enum APIError: Error, CustomStringConvertible {
         case notFound
         case genericError
-        case missingToken
 
         var description: String {
             switch self {
@@ -21,11 +20,11 @@ struct GitHubClient: GitHubClientProtocol {
                 "not found"
             case .genericError:
                 "generic"
-            case .missingToken:
-                "missing access token"
             }
         }
     }
+
+    let gitHubToken: String
 
     func getLatestRelease(_ owner: String, _ repo: String) async throws -> GitHubRelease {
         try await get(reposPath: "\(owner)/\(repo)/releases/latest")
@@ -54,14 +53,12 @@ struct GitHubClient: GitHubClientProtocol {
 
 private extension GitHubClient {
     func get<T: Decodable>(reposPath: String) async throws -> T {
-        guard let token = await Configuration.shared.gitHubToken else { throw APIError.missingToken }
-
         let url = "https://api.github.com/repos/\(reposPath)"
         Logger.gitHubClient.debug("Getting \(url)...")
         var request = URLRequest(url: URL(string: url)!)
         request.addValue("application/vnd.github+json", forHTTPHeaderField: "Accept")
         request.addValue("2022-11-28", forHTTPHeaderField: "X-GitHub-Api-Version")
-        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer \(gitHubToken)", forHTTPHeaderField: "Authorization")
 
         let (data, response) = try await URLSession.shared.data(for: request)
         let httpResponse = response as? HTTPURLResponse

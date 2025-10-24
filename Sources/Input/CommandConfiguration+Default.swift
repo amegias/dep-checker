@@ -1,6 +1,16 @@
+import ArgumentParser
 import Foundation
 
-public extension String {
+public extension CommandConfiguration {
+    static var `default`: Self {
+        Self(
+            abstract: "Check the outdated dependencies",
+            version: .appVersion
+        )
+    }
+}
+
+private extension String {
     static var appVersion: Self {
         try! String(
             contentsOf: Bundle.module.url(

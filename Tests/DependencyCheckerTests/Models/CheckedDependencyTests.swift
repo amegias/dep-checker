@@ -1,4 +1,3 @@
-@testable import DependencyChecker
 import Foundation
 @testable import Models
 import Testing
@@ -33,7 +32,7 @@ extension CheckedDependencyTests {
         (.success(Date(timeIntervalSince1970: 86_400)), .failure(NSError.any()), nil, nil)
     ] as [DaysOutdatedScenario])
     func daysOutdatedWithMaxDefined(scenario: DaysOutdatedScenario) {
-        let (currentVersionDate, latestVersion, expectedDays, expectedOutdated) = scenario
+        let (currentVersionDate, latestVersion, expectedDays, expectedExceedsMaxDays) = scenario
         let sut = CheckedDependency(
             from: .any(name: "any"),
             currentVersionDate: currentVersionDate,
@@ -42,7 +41,7 @@ extension CheckedDependencyTests {
         )
 
         #expect(sut.outdated?.daysOutdated == expectedDays)
-        #expect(sut.outdated?.isOutdated == expectedOutdated)
+        #expect(sut.outdated?.exceedsMaxDays == expectedExceedsMaxDays)
     }
 
     @Test
@@ -55,7 +54,7 @@ extension CheckedDependencyTests {
         )
 
         #expect(sut.outdated?.daysOutdated == 4)
-        #expect(sut.outdated?.isOutdated == false)
+        #expect(sut.outdated?.exceedsMaxDays == nil)
     }
 }
 

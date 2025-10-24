@@ -25,44 +25,60 @@ let package = Package(
         .executableTarget(
             name: "MCPServer",
             dependencies: [
+                .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "MCP", package: "swift-sdk"),
-                "Models",
-                "Input",
+                "MCPServerInput",
                 "DependencyChecker",
                 "ProjectAnalyzer",
-                "Validation"
+                "Validation",
             ],
         ),
         .executableTarget(
             name: "CLI",
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                "Output",
+                "CLIInput",
+                "DependencyChecker",
+                "ProjectAnalyzer",
+                "Validation",
+            ]
+        ),
+        .target(
+            name: "CLIInput",
+            dependencies: [
                 "Models",
                 "Output",
                 "Input",
-                "DependencyChecker",
-                "ProjectAnalyzer",
-                "Validation"
+            ]
+        ),
+        .target(
+            name: "MCPServerInput",
+            dependencies: [
+                .product(name: "MCP", package: "swift-sdk"),
+                "Input",
             ]
         ),
         .target(
             name: "Models",
+            dependencies: []
+        ),
+        .target(
+            name: "Input",
             dependencies: [
-                .product(name: "ArgumentParser", package: "swift-argument-parser")
+                .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                "Models"
             ],
             resources: [
                 .copy("VERSION.txt")
             ]
         ),
         .target(
-            name: "Input",
-            dependencies: ["Models"]
-        ),
-        .target(
             name: "Output",
             dependencies: [
+                .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                .product(name: "Table", package: "Table"),
                 "Models",
-                .product(name: "Table", package: "Table")
             ]
         ),
         .target(
@@ -93,9 +109,15 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "InputTests",
+            name: "CLIInputTests",
             dependencies: [
-                "Input"
+                "CLIInput"
+            ]
+        ),
+        .testTarget(
+            name: "MCPServerInputTests",
+            dependencies: [
+                "MCPServerInput"
             ]
         ),
         .testTarget(

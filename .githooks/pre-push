@@ -1,5 +1,11 @@
 #!/bin/bash
 
+echo "⚰️ Detecting dead code..."
+if ! make scan_dead_code; then
+    echo "😵 Dead code found"
+    exit 1
+fi
+
 echo "🔬 Executing tests..."
 if ! make tests; then
     echo "😵 Tests failed"

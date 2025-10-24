@@ -32,28 +32,28 @@ extension TablePrinterTests {
             [
                 "5",
                 "https://5.com",
-                "abcd (Error: Error Domain=anyError Code=-1 \"(null)\")",
-                "Error: Error Domain=anyError Code=-1 \"(null)\"",
+                "abcd (Error: The operation couldn’t be completed. (anyError error -1.))",
+                "Error: The operation couldn’t be completed. (anyError error -1.)",
                 ""
             ],
             [
                 "4",
                 "https://4.com",
-                "abcd (Error: Error Domain=anyError Code=-1 \"(null)\")",
-                "Error: Error Domain=anyError Code=-1 \"(null)\"",
+                "abcd (Error: The operation couldn’t be completed. (anyError error -1.))",
+                "Error: The operation couldn’t be completed. (anyError error -1.)",
                 ""
             ],
             [
                 "3",
                 "https://3.com",
                 "abcd (1971-04-08 23:06:40 +0000)",
-                "Error: Error Domain=anyError Code=-1 \"(null)\"",
+                "Error: The operation couldn’t be completed. (anyError error -1.)",
                 ""
             ],
             [
                 "2",
                 "https://2.com",
-                "1.0.0 (Error: Error Domain=anyError Code=-1 \"(null)\")",
+                "1.0.0 (Error: The operation couldn’t be completed. (anyError error -1.))",
                 "v2.0 (1973-03-03 09:46:40 +0000)",
                 ""
             ]

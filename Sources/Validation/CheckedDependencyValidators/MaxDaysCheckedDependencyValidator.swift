@@ -10,7 +10,7 @@ public struct MaxDaysCheckedDependencyValidator {
 }
 
 extension MaxDaysCheckedDependencyValidator: CheckedDependencyValidator {
-    func validate(_ checkedDependencies: [CheckedDependency]) throws {
+    public func validate(_ checkedDependencies: [CheckedDependency]) throws {
         for dependency in checkedDependencies {
             try dependency.validate()
         }
@@ -19,7 +19,7 @@ extension MaxDaysCheckedDependencyValidator: CheckedDependencyValidator {
 
 private extension CheckedDependency {
     func validate() throws(MaxDaysCheckedDependencyValidator.ValidationError) {
-        if let outdated, outdated.isOutdated {
+        if let outdated, outdated.exceedsMaxDays == true {
             throw MaxDaysCheckedDependencyValidator.ValidationError.exceedsMaxDays(name)
         }
     }

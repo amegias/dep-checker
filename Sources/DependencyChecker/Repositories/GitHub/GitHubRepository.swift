@@ -10,7 +10,19 @@ struct GitHubRepository {
     let dependency: AnalyzedDependency
 
     init(
-        gitHubClient: GitHubClientProtocol = GitHubClient(),
+        gitHubToken: String,
+        owner: String,
+        repository: String,
+        dependency: AnalyzedDependency
+    ) {
+        gitHubClient = GitHubClient(gitHubToken: gitHubToken)
+        self.owner = owner
+        self.repository = repository
+        self.dependency = dependency
+    }
+
+    init(
+        gitHubClient: GitHubClientProtocol,
         owner: String,
         repository: String,
         dependency: AnalyzedDependency

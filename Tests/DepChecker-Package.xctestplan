@@ -1,0 +1,72 @@
+{
+  "configurations" : [
+    {
+      "id" : "0AC65E2D-2B79-4328-A6E9-585A4CB1B0DD",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "language" : "en",
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:",
+      "identifier" : "dep-checker",
+      "name" : "dep-checker"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "DependencyCheckerTests",
+        "name" : "DependencyCheckerTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "ModelsTests",
+        "name" : "ModelsTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "OutputTests",
+        "name" : "OutputTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "ProjectAnalyzerTests",
+        "name" : "ProjectAnalyzerTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "ValidationTests",
+        "name" : "ValidationTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "CLIInputTests",
+        "name" : "CLIInputTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "MCPServerInputTests",
+        "name" : "MCPServerInputTests"
+      }
+    }
+  ],
+  "version" : 1
+}

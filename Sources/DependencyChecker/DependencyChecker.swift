@@ -4,8 +4,8 @@ import Models
 public struct DependencyChecker {
     private let repositoryMatcherFactory: RepositoryMatcherFactoryProtocol
 
-    public init() {
-        repositoryMatcherFactory = RepositoryMatcherFactory()
+    public init(matchers: [RepositoryMatcher]) {
+        repositoryMatcherFactory = RepositoryMatcherFactory(matchers: matchers)
     }
 
     init(repositoryMatcherFactory: RepositoryMatcherFactoryProtocol) {
@@ -16,8 +16,8 @@ public struct DependencyChecker {
 public extension DependencyChecker {
     func check(
         _ dependencies: Set<AnalyzedDependency>,
-        maxDays: Int?,
-        maxDaysPerDependency: [String: Int]
+        maxDays: Int? = nil,
+        maxDaysPerDependency: [String: Int] = [:]
     ) async -> [CheckedDependency] {
         await withTaskGroup(of: CheckedDependency.self) { group in
             for dependency in dependencies {

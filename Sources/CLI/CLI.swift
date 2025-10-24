@@ -1,18 +1,14 @@
 import ArgumentParser
+import CLIInput
 import DependencyChecker
 import Foundation
-import Input
-import Models
 import Output
 import ProjectAnalyzer
 import Validation
 
 @main
 struct CLI: AsyncParsableCommand {
-    static let configuration = CommandConfiguration(
-        abstract: "Check the outdated dependencies",
-        version: .appVersion
-    )
+    static let configuration = CommandConfiguration.default
 
     // MARK: - Args
 
@@ -65,10 +61,6 @@ struct CLI: AsyncParsableCommand {
             )
         )
 
-        await Configuration.shared.configure(
-            gitHubToken: input.gitHubToken
-        )
-
         // MARK: - Analyze the project
 
         let dependencies = try ProjectAnalyzer().getDependencies(
@@ -81,11 +73,18 @@ struct CLI: AsyncParsableCommand {
 
         // MARK: - Dependency checks
 
-        let results = await DependencyChecker().check(
-            dependencies,
-            maxDays: input.maxDays,
-            maxDaysPerDependency: input.maxDaysPerDependency
-        )
+        var matchers: [RepositoryMatcher] = [
+            BitbucketRepositoryMatcher()
+        ]
+        if let gitHubToken = input.gitHubToken {
+            matchers.append(GitHubRepositoryMatcher(gitHubToken: gitHubToken))
+        }
+        let results = await DependencyChecker(matchers: matchers)
+            .check(
+                dependencies,
+                maxDays: input.maxDays,
+                maxDaysPerDependency: input.maxDaysPerDependency
+            )
 
         // MARK: - Get the output
 
@@ -93,25 +92,9 @@ struct CLI: AsyncParsableCommand {
 
         // MARK: - Exit based on validations
 
-        try DependencyValidator().validate(results)
-    }
-}
-
-private extension FileInput {
-    static func anyExample() -> String {
-        let jsonEncoder = JSONEncoder()
-        jsonEncoder.outputFormatting = [.prettyPrinted]
-        let example = FileInput(
-            gitHubToken: "anyToken",
-            maxDays: 30,
-            maxDaysPerDependency: ["mistica-ios": 10]
-        )
-        let data = try! jsonEncoder.encode(example)
-        return """
-        gitHubToken (optional)
-        maxDays (optional)
-        maxDaysPerDependency (optional)
-        \(String(data: data, encoding: .utf8)!)
-        """
+        let validators: [CheckedDependencyValidator] = [
+            MaxDaysCheckedDependencyValidator()
+        ]
+        try DependencyValidator(validators: validators).validate(results)
     }
 }

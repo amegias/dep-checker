@@ -53,11 +53,15 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "--configuration-file &quot;~/.depChecker/config.json&quot;"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--git-hub-token anytoken"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--version"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--output-format json"
@@ -85,7 +89,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--project-path &quot;~/Downloads/depChecker/Tests/ProjectAnalyzerTests/resources/spmProject&quot;"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>
