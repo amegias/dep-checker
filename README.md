@@ -36,7 +36,7 @@ The parameters specified in-line take precedence over these.
 #### Mint
 
 ```sh
-mint run --executable dep-checker amegias/ios-dep-checker [--output-format <output-format>] [--configuration-file <configuration-file>] [--github-token <github-token>] --project-path <project-path> [--resolved-package-path <resolved-package-path>] [--max-days <max-days>] [--exclude-dependencies <exclude-dependencies> ...] [--include-dependencies <include-dependencies> ...] [--include-transitive-dependencies]
+mint run --executable dep-checker amegias/dep-checker [--output-format <output-format>] [--configuration-file <configuration-file>] [--github-token <github-token>] --project-path <project-path> [--resolved-package-path <resolved-package-path>] [--max-days <max-days>] [--exclude-dependencies <exclude-dependencies> ...] [--include-dependencies <include-dependencies> ...] [--include-transitive-dependencies]
 ```
 
 #### Swift
@@ -68,7 +68,7 @@ jobs:
     # Checking out DepChecker in depChecker sub-folder
     uses: actions/checkout@v4
     with:
-      repository: amegias/ios-dep-checker
+      repository: amegias/dep-checker
       path: depChecker
 
     - name: Execute DepChecker
@@ -111,9 +111,10 @@ GH_TOKEN=anyToken
       "command": "mint",
       "args": [
         "run",
-        "amegias/ios-dep-checker",
+        "amegias/dep-checker",
         "dep-checker-mcp",
-        "--configuration-file ~/.depChecker/config.json"  // Optional
+        "--configuration-file", // Optional
+        "~/.depChecker/config.json" // Optional
       ],
       "env": {
         "GH_TOKEN": "any" // Optional
