@@ -18,7 +18,7 @@ struct BitbucketRepositoryMatcherTests {
         "https://whatever.com/owner/repo.git",
         "https://docs.bitbucket.org/en/rest/git/tags"
     ])
-    func unknownDependenciesThrowsNotFound(dependencyUrl: String) throws {
+    func unknownDependenciesThrowsNotFound(dependencyUrl: String) {
         let sut = BitbucketRepositoryMatcher()
 
         #expect(throws: RepositoryMatcherError.notMatch.self, performing: {

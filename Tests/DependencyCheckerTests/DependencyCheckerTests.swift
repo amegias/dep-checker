@@ -7,7 +7,7 @@ struct DependencyCheckerTests {}
 
 extension DependencyCheckerTests {
     @Test
-    func gotInfoInParallel_check_returnsDataWhenAllCompleted() async throws {
+    func gotInfoInParallel_check_returnsDataWhenAllCompleted() async {
         let dependencyA: AnalyzedDependency = .any(name: "A")
         let expectedDependencyA = CheckedDependency(
             from: dependencyA,

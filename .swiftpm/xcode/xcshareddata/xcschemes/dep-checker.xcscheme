@@ -76,19 +76,19 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--project-path &quot;~/Downloads/depChecker/Tests/ProjectAnalyzerTests/resources/xcodeprojProject/&quot;"
+            argument = "--project-path &quot;~/Projects/iOS/DepChecker/Tests/ProjectAnalyzerTests/resources/xcodeprojProject/&quot;"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--resolved-package-path &quot;~/Downloads/depChecker/Tests/ProjectAnalyzerTests/resources/xcodeprojProject/example.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/&quot;"
+            argument = "--resolved-package-path &quot;~/Projects/iOS/DepChecker/Tests/ProjectAnalyzerTests/resources/xcodeprojProject/example.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/&quot;"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--project-path &quot;~/Downloads/depChecker/Tests/ProjectAnalyzerTests/resources/wrongSPMProject&quot;"
+            argument = "--project-path &quot;~/Projects/iOS/DepChecker/Tests/ProjectAnalyzerTests/resources/wrongSPMProject&quot;"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--project-path &quot;~/Downloads/depChecker/Tests/ProjectAnalyzerTests/resources/spmProject&quot;"
+            argument = "--project-path &quot;~/Projects/iOS/DepChecker/Tests/ProjectAnalyzerTests/resources/spmProject&quot;"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

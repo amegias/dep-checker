@@ -15,10 +15,10 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/tuist/XcodeProj", exact: "9.5.0"),
-        .package(url: "https://github.com/apple/swift-argument-parser.git", exact: "1.6.1"),
-        .package(url: "https://github.com/ShawnBaek/Table.git", exact: "2.0.0"),
-        .package(url: "https://github.com/nicklockwood/SwiftFormat", exact: "0.57.2"),
+        .package(url: "https://github.com/tuist/XcodeProj", exact: "9.7.2"),
+        .package(url: "https://github.com/apple/swift-argument-parser.git", exact: "1.7.0"),
+        .package(url: "https://github.com/ShawnBaek/Table.git", exact: "2.1.0"),
+        .package(url: "https://github.com/nicklockwood/SwiftFormat", exact: "0.59.0"),
         .package(url: "https://github.com/modelcontextprotocol/swift-sdk", exact: "0.10.2"),
     ],
     targets: [

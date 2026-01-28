@@ -224,7 +224,7 @@ extension ProjectAnalyzerTests {
     }
 
     @Test
-    func xcodeprojFileAndPackageFileNotFound_getDependencies_throwsError() throws {
+    func xcodeprojFileAndPackageFileNotFound_getDependencies_throwsError() {
         // given
         let fileFinderMock = FileFinderMock(
             xcodeProjUrl: nil,

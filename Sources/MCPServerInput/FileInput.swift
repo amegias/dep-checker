@@ -3,12 +3,6 @@ import Foundation
 public struct FileInput: Codable {
     let gitHubToken: String?
 
-    init(
-        gitHubToken: String?
-    ) {
-        self.gitHubToken = gitHubToken
-    }
-
     public static func anyExample() -> String {
         let jsonEncoder = JSONEncoder()
         jsonEncoder.outputFormatting = [.prettyPrinted]

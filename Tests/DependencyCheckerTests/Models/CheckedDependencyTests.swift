@@ -62,7 +62,7 @@ extension CheckedDependencyTests {
 
 extension CheckedDependencyTests {
     @Test
-    func sort() async throws {
+    func sort() {
         let dependencies: [CheckedDependency] = [
             CheckedDependency(
                 from: .any(name: "1"),

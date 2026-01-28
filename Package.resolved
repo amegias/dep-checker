@@ -1,5 +1,5 @@
 {
-  "originHash" : "10cb41fb509b0d90f98b9ffa877edc4834a208de70b1c6ebce8adecc6b8bdebd",
+  "originHash" : "2d2e2de57dd307a61ff5c2acc1727787c30ab121c428147c01bada63714f93fa",
   "pins" : [
     {
       "identity" : "aexml",
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-argument-parser",
       "state" : {
-        "revision" : "309a47b2b1d9b5e991f36961c983ecec72275be3",
-        "version" : "1.6.1"
+        "revision" : "c5d11a805e765f52ba34ec7284bd4fcd6ba68615",
+        "version" : "1.7.0"
       }
     },
     {
@@ -78,8 +78,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nicklockwood/SwiftFormat",
       "state" : {
-        "revision" : "b83a8f132ff5430f3b6ff7d912baa407caea9e29",
-        "version" : "0.57.2"
+        "revision" : "c8b8d61f325d92d59e273a80a939cb60e489054e",
+        "version" : "0.59.0"
       }
     },
     {
@@ -87,8 +87,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ShawnBaek/Table",
       "state" : {
-        "revision" : "28660d083736f51f4298b99b01fc40233c0208b4",
-        "version" : "2.0.0"
+        "revision" : "4c23d90f8aa335cd876df9c7fb9c7563a587dc15",
+        "version" : "2.1.0"
       }
     },
     {
@@ -96,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/tuist/XcodeProj.git",
       "state" : {
-        "revision" : "e1f2a4365669e02272b2f381b13a2378b15fb485",
-        "version" : "9.5.0"
+        "revision" : "31712ec42e9cbc46e7fd25ea55c2730cb3476097",
+        "version" : "9.7.2"
       }
     }
   ],

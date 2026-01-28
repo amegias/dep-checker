@@ -20,7 +20,7 @@ extension DependencyValidatorTests {
     }
 
     @Test
-    func validationKo_validate_throwsFirstError() throws {
+    func validationKo_validate_throwsFirstError() {
         let checkedDependencyValidators: [CheckedDependencyValidator] = [
             SucceedValidator(),
             FailedValidator(error: "first"),

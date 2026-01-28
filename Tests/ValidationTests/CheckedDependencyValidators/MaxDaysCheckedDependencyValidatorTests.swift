@@ -16,7 +16,7 @@ extension MaxDaysCheckedDependencyValidatorTests {
     }
 
     @Test(arguments: [10, 11, nil])
-    func maxDaysDoNotExceedOutdatedIntervalDoNotThrow(maxDays: Int?) async throws {
+    func maxDaysDoNotExceedOutdatedIntervalDoNotThrow(maxDays: Int?) throws {
         let sut = MaxDaysCheckedDependencyValidator()
         let results = buildResults(maxDays: maxDays)
         try sut.validate(results)

@@ -21,7 +21,7 @@ struct RepositoryMatcherFactoryTests {
     }
 
     @Test
-    func matchesWithNothing() async throws {
+    func matchesWithNothing() async {
         let repositoryMatchers: [RepositoryMatcher] = [
             NotMatchedRepositoryMatcherMock(),
             NotMatchedRepositoryMatcherMock()

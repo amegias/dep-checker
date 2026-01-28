@@ -17,7 +17,7 @@ struct GitHubRepositoryMatcherTests {
         "https://whatever.com/owner/repo.git",
         "https://docs.github.com/en/rest/git/tags"
     ])
-    func unknownDependenciesThrowsNotFound(dependencyUrl: String) async throws {
+    func unknownDependenciesThrowsNotFound(dependencyUrl: String) async {
         let sut = GitHubRepositoryMatcher(gitHubToken: "any")
 
         await #expect(throws: RepositoryMatcherError.notMatch.self, performing: {

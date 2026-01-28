@@ -7,7 +7,7 @@ struct InputCalculatorTests {}
 
 extension InputCalculatorTests {
     @Test
-    func fileExistsButCannotBeRead_calculate_throwsError() throws {
+    func fileExistsButCannotBeRead_calculate_throwsError() {
         let fileInputReader = FileInputReader(
             fileExists: { _ in true },
             contentsOf: { _ in throw NSError(domain: "", code: 0) }
